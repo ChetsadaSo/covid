@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1079276629838",
+    "firebase_url": "https://codvid-id-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "codvid-id",
+    "storage_bucket": "codvid-id.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079276629838:android:33bdaf60aeb73dcd14f81f",
+        "android_client_info": {
+          "package_name": "TBC.covid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079276629838-phkhf1do3qsapka88i9dutauqgh5q79f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "TBC.covid",
+            "certificate_hash": "a854e12907f06588c10d37caa5d0d862d85e495b"
+          }
+        },
+        {
+          "client_id": "1079276629838-ag7bnga379fvbuqt4env1m7sp6uhtafb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGNyB3ph9TT5WJfw37uQcV4zIy0nwpNr4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079276629838-ag7bnga379fvbuqt4env1m7sp6uhtafb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
