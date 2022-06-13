@@ -1,3 +1,4 @@
+import 'package:covid/views/navBar/navbar.dart';
 import 'package:covid/views/pages/auth/registerPage.dart';
 import 'package:covid/views/pages/homePage/homepage.dart';
 import 'package:flutter/material.dart';
@@ -32,18 +33,21 @@ class _LoginPageState extends State<LoginPage> {
         body: Center(
           child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/images/covid-19.png',
-                    ),
-                    scale: 0.5,
-                    fit: BoxFit.cover,
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/covid-19.png',
                   ),
-                  // borderRadius: BorderRadius.circular(16),
-                  gradient: LinearGradient(colors: [
+                  scale: 0.1,
+                  fit: BoxFit.cover,
+                ),
+                // borderRadius: BorderRadius.circular(16),
+                gradient: LinearGradient(
+                  colors: [
                     Color.fromARGB(221, 45, 45, 45),
                     Color.fromARGB(255, 133, 135, 130)
-                  ])),
+                  ],
+                ),
+              ),
               // margin: EdgeInsets.all(32),
               padding: EdgeInsets.all(56),
               child: Column(
@@ -67,14 +71,15 @@ class _LoginPageState extends State<LoginPage> {
         signIn();
       },
       child: Container(
-          constraints: BoxConstraints.expand(height: 50),
-          child: Text("เข้าสู่ระบบ",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18, color: Colors.white)),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16), color: Colors.green),
-          margin: EdgeInsets.only(top: 16),
-          padding: EdgeInsets.all(12)),
+        constraints: BoxConstraints.expand(height: 50),
+        child: Text("เข้าสู่ระบบ",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18, color: Colors.white)),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16), color: Colors.green),
+        margin: EdgeInsets.only(top: 16),
+        padding: EdgeInsets.all(12),
+      ),
     );
   }
 
@@ -180,9 +185,10 @@ class _LoginPageState extends State<LoginPage> {
   Future checkAuth(BuildContext context) async {
     User? user = await _auth.currentUser;
     if (user != null) {
+      CircularProgressIndicator();
       print("Already singed-in with");
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MyHomePage(user)));
+          context, MaterialPageRoute(builder: (context) => navBar(user, 0)));
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:covid/views/NavBar/navbar.dart';
 import 'package:covid/views/pages/auth/loginPage.dart';
 import 'package:covid/views/pages/homePage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -152,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
       print("Already singed-in with");
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage(user)),
+          MaterialPageRoute(builder: (context) => navBar(user, 0)),
           ModalRoute.withName('/'));
     }
   }
