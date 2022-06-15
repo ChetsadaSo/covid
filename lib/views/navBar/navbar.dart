@@ -1,6 +1,8 @@
 import 'package:covid/views/pages/auth/loginPage.dart';
 import 'package:covid/views/pages/daily/dailyCovid.dart';
 import 'package:covid/views/pages/homePage/homepage.dart';
+import 'package:covid/views/pages/round1to2/round_1to_2.dart';
+import 'package:covid/views/pages/round3/round3.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,12 +25,6 @@ class _navBarState extends State<navBar> {
     super.initState();
   }
 
-  Future<void> _refresh() async {
-    setState(() {
-      LoginPage();
-    });
-  }
-
   void _onItem(int index) {
     setState(() {
       currentIndex = index;
@@ -45,18 +41,8 @@ class _navBarState extends State<navBar> {
         _onItem(index);
       }),
       dailyCovids(),
-      Center(
-        child: Text(
-          'Haha',
-          style: TextStyle(fontSize: 60),
-        ),
-      ),
-      Center(
-        child: Text(
-          'hehe',
-          style: TextStyle(fontSize: 60),
-        ),
-      ),
+      round1to2(),
+      round3(),
     ];
     return Scaffold(
       appBar: appbar(context),
@@ -68,22 +54,22 @@ class _navBarState extends State<navBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.blue,
+            backgroundColor: Color.fromARGB(255, 198, 200, 202),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.newspaper),
             label: 'Daily',
             backgroundColor: Colors.grey,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.one_k),
-            label: 'Covid1',
-            backgroundColor: Colors.pink,
+            icon: Icon(Icons.airline_stops_outlined),
+            label: 'ครั้งแรกและครั้งที่สอง',
+            backgroundColor: Color.fromARGB(255, 81, 74, 76),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.two_k),
-            label: 'Covid2',
-            backgroundColor: Colors.red,
+            icon: Icon(Icons.moving_outlined),
+            label: 'ระบาดครั้งที่สาม',
+            backgroundColor: Color.fromARGB(255, 171, 169, 168),
           ),
         ],
       ),
@@ -108,13 +94,9 @@ class _navBarState extends State<navBar> {
                   value: 0,
                   child: Text("Profile"),
                 ),
-                PopupMenuItem<int>(
-                  value: 1,
-                  child: Text("Refresh"),
-                ),
                 PopupMenuDivider(),
                 PopupMenuItem<int>(
-                    value: 2,
+                    value: 1,
                     child: Row(
                       children: [
                         Icon(
@@ -150,10 +132,8 @@ class _navBarState extends State<navBar> {
         // Navigator.of(context)
         //     .push(MaterialPageRoute(builder: (context) => SettingPage()));
         break;
+
       case 1:
-        _refresh();
-        break;
-      case 2:
         print("User Logged out");
         signOut(context);
         break;

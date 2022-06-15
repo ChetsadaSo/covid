@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:covid/config/size.dart';
 import 'package:covid/views/navBar/navbar.dart';
 import 'package:covid/views/pages/auth/loginPage.dart';
 import 'package:covid/views/pages/daily/dailyCovid.dart';
@@ -5,9 +8,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+typedef Int2VoidFunc = void Function(int);
+
 class MyHomePage extends StatefulWidget {
   final User user;
-  final VoidCallback _onItem;
+  final Int2VoidFunc _onItem;
   MyHomePage(this.user, this._onItem, {Key? key}) : super(key: key);
 
   @override
@@ -19,11 +24,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     User users = widget.user;
-    // Id of the provider (ex: google.com)
     String name = widget.user.displayName.toString();
     String email = users.email.toString();
     String photoUrl = users.photoURL.toString();
     String uid = users.uid.toString();
+
     return Scaffold(
       body: body(
         photoUrl,
@@ -42,16 +47,21 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          SizedBox(
+            height: getScreenHeight(20),
+          ),
           avatar(photoUrl),
-          SizedBox(),
+          SizedBox(
+            height: getScreenHeight(20),
+          ),
           nameUser(name),
           emailUser(email),
           SizedBox(
-            height: 40,
+            height: getScreenHeight(40),
           ),
           dailyCovid(),
           SizedBox(
-            height: 20,
+            height: getScreenHeight(20),
           ),
           rippleOfCovid(),
         ],
@@ -63,8 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Center(
       child: Column(
         children: [
-          ripple1(),
-          ripple2(),
+          ripple1to2(),
           ripple3(),
         ],
       ),
@@ -73,10 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Padding ripple3() {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 5, 10),
+      padding: EdgeInsetsDirectional.all(getScreenHeight(20)),
       child: Container(
-        width: 300,
-        height: 70,
+        width: getScreenWidth(300),
+        height: getScreenHeight(70),
         decoration: BoxDecoration(
           color: Color(0xFFEEEEEE),
           borderRadius: BorderRadius.only(
@@ -86,56 +95,26 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: InkWell(
           onDoubleTap: () {
-            print('object4');
+            widget._onItem(3);
           },
           child: Container(
             // margin: EdgeInsets.only(top: 16),
-            padding: EdgeInsets.all(25),
+            padding: EdgeInsets.all(getScreenHeight(25)),
             child: Center(child: Text('สถานการณ์การระบาดรอบที่สาม')),
-            width: 300,
-            height: 100,
+            width: getScreenWidth(300),
+            height: getScreenHeight(100),
           ),
         ),
       ),
     );
   }
 
-  Padding ripple2() {
+  Padding ripple1to2() {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 10),
+      padding: EdgeInsetsDirectional.all(getScreenHeight(20)),
       child: Container(
-        width: 300,
-        height: 70,
-        decoration: BoxDecoration(
-          color: Color(0xFFEEEEEE),
-          borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(10),
-            topLeft: Radius.circular(10),
-          ),
-          shape: BoxShape.rectangle,
-        ),
-        child: InkWell(
-          onDoubleTap: () {
-            print('object3');
-          },
-          child: Container(
-            // margin: EdgeInsets.only(top: 16),
-            padding: EdgeInsets.all(25),
-            child: Center(child: Text('สถานการณ์การระบาดรอที่สอง')),
-            width: 300,
-            height: 100,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Padding ripple1() {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 5, 10),
-      child: Container(
-        width: 300,
-        height: 70,
+        width: getScreenWidth(300),
+        height: getScreenHeight(70),
         decoration: BoxDecoration(
           color: Color(0xFFEEEEEE),
           borderRadius: BorderRadius.only(
@@ -145,14 +124,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: InkWell(
           onDoubleTap: () {
-            print('object2');
+            widget._onItem(2);
           },
           child: Container(
             // margin: EdgeInsets.only(top: 16),
-            padding: EdgeInsets.all(25),
+            padding: EdgeInsets.all(getScreenHeight(25)),
             child: Center(child: Text('สถานการณ์การระบาดรอบแรก')),
-            width: 300,
-            height: 100,
+            width: getScreenWidth(300),
+            height: getScreenHeight(100),
           ),
         ),
       ),
@@ -177,15 +156,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       child: InkWell(
         onDoubleTap: () {
-          widget._onItem();
-          print('object');
+          widget._onItem(1);
         },
         child: Container(
           // margin: EdgeInsets.only(top: 16),
-          padding: EdgeInsets.all(25),
+          padding: EdgeInsets.all(getScreenHeight(25)),
           child: Center(child: Text('รายงานประจำวัน')),
-          width: 300,
-          height: 100,
+          width: getScreenWidth(300),
+          height: getScreenHeight(100),
         ),
       ),
     );
@@ -193,27 +171,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Padding emailUser(String email) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-        child: Text(
-          email,
-          style: TextStyle(color: Colors.black),
-        ),
+      padding: EdgeInsetsDirectional.all(getScreenHeight(10)),
+      child: Text(
+        email,
+        style: TextStyle(color: Colors.black),
       ),
     );
   }
 
   Padding nameUser(String name) {
+    if (name == null) {
+      name = "Full name";
+    }
+    ;
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-        child: Text(
-          name,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+      padding: EdgeInsetsDirectional.all(getScreenHeight(10)),
+      child: Text(
+        name,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
@@ -223,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Align(
       alignment: AlignmentDirectional(0, 0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 16, 0),
+        padding: EdgeInsetsDirectional.all(getScreenHeight(10)),
         child: Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           elevation: 2,
@@ -231,10 +207,10 @@ class _MyHomePageState extends State<MyHomePage> {
             borderRadius: BorderRadius.circular(40),
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+            padding: EdgeInsetsDirectional.all(getScreenHeight(1)),
             child: Container(
-              width: 60,
-              height: 60,
+              width: getScreenWidth(80),
+              height: getScreenHeight(80),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
