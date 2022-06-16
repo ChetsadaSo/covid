@@ -1,3 +1,4 @@
+import 'package:covid/config/size.dart';
 import 'package:covid/controllers/covidround_1to2_controller.dart';
 import 'package:covid/models/covidround_1to2_model.dart';
 import 'package:covid/services/covidround_1to2_service.dart';
@@ -92,6 +93,12 @@ class _round1to2State extends State<round1to2> {
                                   xValueMapper: (ChartData data, _) => data.x,
                                   yValueMapper: (ChartData data, _) => data.y)
                             ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(getScreenHeight(10)),
+                          child: Divider(
+                            color: Colors.black,
                           ),
                         ),
                         Container(

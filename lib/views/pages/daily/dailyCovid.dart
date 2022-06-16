@@ -64,9 +64,11 @@ class _dailyCovidState extends State<dailyCovids> {
       child: Container(
         margin: EdgeInsets.only(top: getScreenHeight(50)),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "ข้อมูลโควิด",
@@ -139,8 +141,10 @@ class _dailyCovidState extends State<dailyCovids> {
         ]),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
             margin: EdgeInsets.fromLTRB(
                 getScreenWidth(20), getScreenHeight(10), 0, 0),
             child: Text(
@@ -151,14 +155,17 @@ class _dailyCovidState extends State<dailyCovids> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          Text(
-            NumberFormat("#,###").format(covidtoday[index].totalRecovered) +
-                " " +
-                "คน",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: getScreenHeight(30),
-                fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
+            child: Text(
+              NumberFormat("#,###").format(covidtoday[index].totalRecovered) +
+                  " " +
+                  "คน",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: getScreenHeight(30),
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -171,13 +178,15 @@ class _dailyCovidState extends State<dailyCovids> {
       width: getScreenWidth(200),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 69, 217, 163),
-          Color.fromARGB(255, 216, 246, 225),
+          Color.fromARGB(255, 1, 99, 63),
+          Color.fromARGB(255, 69, 220, 163),
         ]),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
             margin: EdgeInsets.fromLTRB(
                 getScreenWidth(50), getScreenHeight(10), 0, 0),
             child: Text(
@@ -208,12 +217,14 @@ class _dailyCovidState extends State<dailyCovids> {
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
           Color.fromARGB(255, 0, 0, 0),
-          Color.fromARGB(255, 223, 219, 219),
+          Color.fromARGB(255, 0, 0, 100),
         ]),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
             margin: EdgeInsets.fromLTRB(
                 getScreenWidth(50), getScreenHeight(10), 0, 0),
             child: Text(
@@ -224,12 +235,16 @@ class _dailyCovidState extends State<dailyCovids> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          Text(
-            NumberFormat("#,###").format(covidtoday[index].totalDeath) + " คน",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: getScreenHeight(35),
-                fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
+            child: Text(
+              NumberFormat("#,###").format(covidtoday[index].totalDeath) +
+                  " คน",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: getScreenHeight(35),
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -242,13 +257,15 @@ class _dailyCovidState extends State<dailyCovids> {
       width: getScreenWidth(180),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 124, 120, 120),
-          Color.fromARGB(255, 223, 219, 219)
+          Color.fromARGB(255, 83, 83, 83),
+          Color.fromARGB(255, 83, 83, 89)
         ]),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
             margin: EdgeInsets.fromLTRB(
                 getScreenWidth(20), getScreenHeight(5), 0, 0),
             child: Text(
@@ -260,6 +277,7 @@ class _dailyCovidState extends State<dailyCovids> {
             ),
           ),
           Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
             margin: EdgeInsets.fromLTRB(getScreenWidth(50), 0, 0, 0),
             child: Text(
               covidtoday[index].newDeath.toString() + " คน",
@@ -280,13 +298,15 @@ class _dailyCovidState extends State<dailyCovids> {
       width: getScreenWidth(180),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 227, 79, 79),
-          Color.fromARGB(255, 247, 213, 213)
+          Color.fromARGB(255, 241, 32, 32),
+          Color.fromARGB(255, 247, 32, 32)
         ]),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
             margin: EdgeInsets.fromLTRB(
                 0, getScreenHeight(10), 0, getScreenHeight(10)),
             child: Text(
@@ -297,33 +317,38 @@ class _dailyCovidState extends State<dailyCovids> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          Text(
-            NumberFormat("#,###").format(covidtoday[index].newCase),
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: getScreenHeight(50),
-                fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
+            child: Text(
+              NumberFormat("#,###").format(covidtoday[index].newCase),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: getScreenHeight(50),
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           SizedBox(
             height: getScreenHeight(10),
           ),
           Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
             margin: EdgeInsets.only(left: getScreenWidth(80)),
-            child: Text("สะสม",
+            child: Text("สะสม ",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: getScreenHeight(20),
                     fontWeight: FontWeight.bold)),
           ),
-          Text(
-              "  " +
-                  NumberFormat("#,###").format(covidtoday[index].totalCase) +
-                  "  " +
-                  "คน",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: getScreenHeight(20),
-                  fontWeight: FontWeight.bold)),
+          Container(
+            padding: EdgeInsets.only(right: getScreenHeight(5)),
+            child: Text(
+                NumberFormat("#,###").format(covidtoday[index].totalCase) +
+                    " คน",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: getScreenHeight(20),
+                    fontWeight: FontWeight.bold)),
+          ),
         ],
       ),
     );

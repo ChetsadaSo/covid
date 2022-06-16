@@ -24,9 +24,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     User users = widget.user;
-    String name = widget.user.displayName.toString();
+    String? name = widget.user.displayName.toString();
+    if (name == null) {
+      name == "full name";
+      print(name);
+    }
     String email = users.email.toString();
-    String photoUrl = users.photoURL.toString();
+    String? photoUrl = users.photoURL.toString();
     String uid = users.uid.toString();
 
     return Scaffold(
@@ -45,25 +49,50 @@ class _MyHomePageState extends State<MyHomePage> {
   ) {
     return SafeArea(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(
             height: getScreenHeight(20),
           ),
-          avatar(photoUrl),
-          SizedBox(
-            height: getScreenHeight(20),
+          Container(
+            child: Row(
+              children: [
+                avatar(photoUrl),
+                SizedBox(
+                  height: getScreenHeight(20),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    nameUser(name),
+                    emailUser(email),
+                  ],
+                ),
+              ],
+            ),
           ),
-          nameUser(name),
-          emailUser(email),
-          SizedBox(
-            height: getScreenHeight(40),
+          Container(
+              margin: EdgeInsetsDirectional.all(getScreenHeight(10)),
+              child: Divider(
+                color: Color.fromARGB(255, 96, 90, 90),
+              )),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: getScreenHeight(40),
+                ),
+                dailyCovid(),
+                SizedBox(
+                  height: getScreenHeight(20),
+                ),
+                rippleOfCovid(),
+              ],
+            ),
           ),
-          dailyCovid(),
-          SizedBox(
-            height: getScreenHeight(20),
-          ),
-          rippleOfCovid(),
         ],
       ),
     );
@@ -87,10 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
         width: getScreenWidth(300),
         height: getScreenHeight(70),
         decoration: BoxDecoration(
-          color: Color(0xFFEEEEEE),
-          borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(10),
-            topLeft: Radius.circular(10),
+          color: Color.fromARGB(255, 171, 0, 0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
         ),
         child: InkWell(
@@ -99,8 +127,12 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           child: Container(
             // margin: EdgeInsets.only(top: 16),
-            padding: EdgeInsets.all(getScreenHeight(25)),
-            child: Center(child: Text('สถานการณ์การระบาดรอบที่สาม')),
+            padding: EdgeInsetsDirectional.all(getScreenHeight(25)),
+            child: Center(
+                child: Text(
+              'สถานการณ์การระบาดรอบที่สาม',
+              style: TextStyle(color: Colors.white),
+            )),
             width: getScreenWidth(300),
             height: getScreenHeight(100),
           ),
@@ -116,10 +148,9 @@ class _MyHomePageState extends State<MyHomePage> {
         width: getScreenWidth(300),
         height: getScreenHeight(70),
         decoration: BoxDecoration(
-          color: Color(0xFFEEEEEE),
-          borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(10),
-            topLeft: Radius.circular(10),
+          color: Color.fromARGB(255, 207, 103, 103),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
         ),
         child: InkWell(
@@ -128,8 +159,12 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           child: Container(
             // margin: EdgeInsets.only(top: 16),
-            padding: EdgeInsets.all(getScreenHeight(25)),
-            child: Center(child: Text('สถานการณ์การระบาดรอบแรก')),
+            padding: EdgeInsetsDirectional.all(getScreenHeight(25)),
+            child: Center(
+                child: Text(
+              'สถานการณ์การระบาดรอบแรก',
+              style: TextStyle(color: Colors.white),
+            )),
             width: getScreenWidth(300),
             height: getScreenHeight(100),
           ),
@@ -144,14 +179,13 @@ class _MyHomePageState extends State<MyHomePage> {
         // borderRadius: BorderRadius.circular(16),
         gradient: LinearGradient(
           colors: [
-            Color.fromARGB(221, 197, 255, 155),
-            Color.fromARGB(255, 246, 247, 245)
+            Color.fromARGB(221, 71, 155, 11),
+            Color.fromARGB(255, 144, 213, 74)
           ],
         ),
         color: Color(0xFFEEEEEE),
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(20),
-          topLeft: Radius.circular(20),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
         ),
       ),
       child: InkWell(
@@ -160,8 +194,13 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: Container(
           // margin: EdgeInsets.only(top: 16),
-          padding: EdgeInsets.all(getScreenHeight(25)),
-          child: Center(child: Text('รายงานประจำวัน')),
+          padding: EdgeInsetsDirectional.all(getScreenHeight(25)),
+          child: Center(
+            child: Text(
+              'รายงานประจำวัน',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
           width: getScreenWidth(300),
           height: getScreenHeight(100),
         ),
@@ -180,10 +219,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Padding nameUser(String name) {
-    if (name == null) {
-      name = "Full name";
-    }
-    ;
     return Padding(
       padding: EdgeInsetsDirectional.all(getScreenHeight(10)),
       child: Text(
@@ -195,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Align avatar(String photoUrl) {
+  Align avatar(String? photoUrl) {
     return Align(
       alignment: AlignmentDirectional(0, 0),
       child: Padding(
@@ -209,15 +244,15 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: EdgeInsetsDirectional.all(getScreenHeight(1)),
             child: Container(
-              width: getScreenWidth(80),
-              height: getScreenHeight(80),
+              width: getScreenWidth(100),
+              height: getScreenHeight(100),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
+                shape: BoxShape.rectangle,
               ),
               child: Image.network(
-                photoUrl,
-                fit: BoxFit.fill,
+                photoUrl!,
+                fit: BoxFit.cover,
               ),
             ),
           ),
