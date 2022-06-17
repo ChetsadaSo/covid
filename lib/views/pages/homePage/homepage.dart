@@ -24,13 +24,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     User users = widget.user;
-    String? name = widget.user.displayName.toString();
-    if (name == null) {
-      name == "full name";
-      print(name);
-    }
+    String name = widget.user.displayName.toString();
+
     String email = users.email.toString();
-    String? photoUrl = users.photoURL.toString();
+    String photoUrl = users.photoURL.toString();
     String uid = users.uid.toString();
 
     return Scaffold(
@@ -222,7 +219,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Padding(
       padding: EdgeInsetsDirectional.all(getScreenHeight(10)),
       child: Text(
-        name,
+        name == "null" ? "Full name" : name,
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -230,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Align avatar(String? photoUrl) {
+  Align avatar(String photoUrl) {
     return Align(
       alignment: AlignmentDirectional(0, 0),
       child: Padding(
@@ -251,7 +248,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: BoxShape.rectangle,
               ),
               child: Image.network(
-                photoUrl!,
+                photoUrl == "null"
+                    ? "https://ichef.bbci.co.uk/news/800/cpsprodpb/1124F/production/_119932207_indifferentcatgettyimages.png.webp"
+                    : photoUrl,
                 fit: BoxFit.cover,
               ),
             ),
